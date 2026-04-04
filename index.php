@@ -1,67 +1,92 @@
 <?php
 
-class Continent {
-    public $nameContinent;
-
-    public function __construct($continent) {
-        $this->nameContinent = $continent;
+class Vertebrate {
+    public function __construct() {
+        $this->printVertebrate();
     }
 
+    protected function printVertebrate() {
+        echo "Sono un vertebrato. \n";
+    }
 };
 
-class Country extends Continent {
-    public $nameCountry;
-
-    public function __construct($continent, $country) {
-        parent::__construct($continent);
-        $this->nameCountry = $country;
+class WarmBlooded extends Vertebrate {
+    public function __construct() {
+        parent::__construct();
+        $this->printWarmBlooded();
     }
 
+    protected function printWarmBlooded() {
+        echo "Sono a sangue caldo. \n";
+    }
 };
 
-class Region extends Country{
-    public $nameRegion;
-
-    public function __construct($continent, $country, $region) {
-        parent::__construct($continent, $country);
-        $this->nameRegion = $region;
+class ColdBlooded extends Vertebrate {
+    public function __construct() {
+        parent::__construct();
+        $this->printColdBlooded();
     }
 
+    protected function printColdBlooded() {
+        echo "Sono a sangue freddo. \n";
+    }
 };
 
-class Province extends Region {
-    public $nameProvince;
-
-    public function __construct($continent, $country, $region, $province) {
-        parent::__construct($continent, $country, $region);
-        $this->nameProvince = $province;
+class Mammal extends WarmBlooded {
+    public function __construct() {
+        parent::__construct();
+        $this->printMammal();
     }
 
+    protected function printMammal() {
+        echo "Sono un mammifero. \n";
+    }
 };
 
-class City extends Province {
-    public $nameCity;
-
-    public function __construct($continent, $country, $region, $province, $city) {
-        parent::__construct($continent, $country, $region, $province);
-        $this->nameCity = $city;
+class Bird extends WarmBlooded {
+    public function __construct() {
+        parent::__construct();
+        $this->printBird();
     }
 
+    protected function printBird() {
+        echo "Sono un uccello. \n";
+    }
 };
 
-class Street extends City {
-    public $nameStreet;
-
-    public function __construct($continent, $country, $region, $province, $city, $street) {
-        parent::__construct($continent, $country, $region, $province, $city);
-        $this->nameStreet = $street;
+class Fish extends ColdBlooded {
+    public function __construct() {
+        parent::__construct();
+        $this->printFish();
     }
 
-    public function getMyCurrentLocation() {
-       echo "Mi trovo in $this->nameStreet, $this->nameCity, $this->nameProvince, $this->nameRegion, $this->nameCountry, $this->nameContinent.";
+    protected function printFish() {
+        echo "Sono un pesce. \n";
+        echo "SPLASH! \n";
     }
-
 };
 
-$myLocation = new Street("Europa", "Italia", "Puglia", "Le", "Lecce", "Via Aldo Moro");
-$myLocation->getMyCurrentLocation();
+class Reptile extends ColdBlooded {
+    public function __construct() {
+        parent::__construct();
+        $this->printReptile();
+    }
+
+    protected function printReptile() {
+        echo "Sono un rettile. \n";
+    }
+};
+
+class Amphibian extends ColdBlooded {
+    public function __construct() {
+        parent::__construct();
+        $this->printAmphibian();
+    }
+
+    protected function printAmphibian() {
+        echo "Sono un anfibio. \n";
+    }
+};
+
+$magikarp = new Fish();
+
