@@ -1,92 +1,46 @@
 <?php
 
-class Vertebrate {
-    public function __construct() {
-        $this->printVertebrate();
-    }
 
-    protected function printVertebrate() {
-        echo "Sono un vertebrato. \n";
-    }
-};
 
-class WarmBlooded extends Vertebrate {
-    public function __construct() {
-        parent::__construct();
-        $this->printWarmBlooded();
-    }
+//Completa la classe Fiat con le strutture mancanti e, utilizzando il livello di severita' che ritieni piu' opportuno, estendi i metodi per stampare a terminale la seguente frase: “La mia macchina e' Opel, con targa ND 123 OJ e nmero di Telaio 1234“.
 
-    protected function printWarmBlooded() {
-        echo "Sono a sangue caldo. \n";
+class Car {
+  private $num_telaio;
+
+  protected function setNumTelaio($num_telaio) 
+  {
+   return $this->num_telaio = $num_telaio;
+  }
+
+  protected function getNumTelaio() 
+    {
+        return $this->num_telaio;
     }
 };
 
-class ColdBlooded extends Vertebrate {
-    public function __construct() {
-        parent::__construct();
-        $this->printColdBlooded();
+class Fiat extends Car {
+  protected $license;
+  protected $name;
+
+  public function __construct($license, $name,) {
+   $this->license = $license;  
+  $this->name = $name;
+  }
+
+  public function SetMyCarTelaio($num_telaio) {
+    return $this->setNumTelaio($num_telaio);
+  }
+
+    public function GetMyCarTelaio() {
+        return $this->getNumTelaio();
     }
 
-    protected function printColdBlooded() {
-        echo "Sono a sangue freddo. \n";
+    public function printCarInfo() {
+        echo "La mia macchina e' $this->name, con targa $this->license e numero di Telaio " . $this->GetMyCarTelaio() . ".";
     }
-};
+}
 
-class Mammal extends WarmBlooded {
-    public function __construct() {
-        parent::__construct();
-        $this->printMammal();
-    }
-
-    protected function printMammal() {
-        echo "Sono un mammifero. \n";
-    }
-};
-
-class Bird extends WarmBlooded {
-    public function __construct() {
-        parent::__construct();
-        $this->printBird();
-    }
-
-    protected function printBird() {
-        echo "Sono un uccello. \n";
-    }
-};
-
-class Fish extends ColdBlooded {
-    public function __construct() {
-        parent::__construct();
-        $this->printFish();
-    }
-
-    protected function printFish() {
-        echo "Sono un pesce. \n";
-        echo "SPLASH! \n";
-    }
-};
-
-class Reptile extends ColdBlooded {
-    public function __construct() {
-        parent::__construct();
-        $this->printReptile();
-    }
-
-    protected function printReptile() {
-        echo "Sono un rettile. \n";
-    }
-};
-
-class Amphibian extends ColdBlooded {
-    public function __construct() {
-        parent::__construct();
-        $this->printAmphibian();
-    }
-
-    protected function printAmphibian() {
-        echo "Sono un anfibio. \n";
-    }
-};
-
-$magikarp = new Fish();
+$myCar = new Fiat("ND 123 OJ", "Opel");
+$myCar->SetMyCarTelaio("1234");
+$myCar->printCarInfo();
 
