@@ -1,38 +1,52 @@
 <?php
 
-require_once "class.php";
+//IronMan
 
-class Post {
-    private $title;
-    private $category;
-    private $tag; 
+require_once "jammer.php";
+require_once "raggioDistruttore.php";
+require_once "pugnoDiFerro.php";
+require_once "scudoImpenetrabile.php";
 
-    public function __construct($title, Category $category, $tag){
-        $this->title = $title;
-        $this->category = $category;
-        $this->tag = $tag;
+class IronMan
+{
+    public $attack;
+    public $defense;
+    public static $counter = 0;
+
+    public function __construct(Attack $attack, Defense $defense)
+    {
+        $this->attack = $attack;
+        $this->defense = $defense;
+        self::$counter++;
     }
 
-    public function getTitle(){
-        return $this->title;
+    public function goAttack()
+    {
+        $this->attack->attack();
     }
 
-    public function getCategory(){
-        return $this->category->getMyCategory();
+    public function goDefense()
+    {
+        $this->defense->defense();
     }
+}   
 
-    public function getTag(){
-        return $this->tag;
-    }
+//esercito di IronMan
+$ironMan = new IronMan(new RaggioDistruttore(), new ScudoImpenetrabile());
+$ironMan->goAttack(); 
+$ironMan->goDefense();
 
-}
+$ironMan2 = new IronMan(new PugnoDiFerro(), new Jammer());
+$ironMan2->goAttack();
+$ironMan2->goDefense();
 
-$post = new Post("Il titolo del mio primo post", new Attualita(), "Tag1, Tag2, Tag3");
-echo $post->getTitle() . "\n";
-echo $post->getCategory() ;
-echo $post->getTag() . "\n";
+$ironMan3 = new IronMan(new RaggioDistruttore(), new Jammer());
+$ironMan3->goAttack();
+$ironMan3->goDefense();
 
-$post2 = new Post("Il titolo del mio secondo post", new Sport(), "Tag4, Tag5, Tag6");
-echo $post2->getTitle() . "\n";
-echo $post2->getCategory();  
-echo $post2->getTag() . "\n";
+$ironMan4 = new IronMan(new PugnoDiFerro(), new ScudoImpenetrabile());
+$ironMan4->goAttack();
+$ironMan4->goDefense();
+
+
+echo "Numero di IronMan creati: " . IronMan::$counter . "\n";
