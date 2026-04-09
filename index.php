@@ -1,52 +1,62 @@
 <?php
 
-//IronMan
+trait Calculator {
 
-require_once "jammer.php";
-require_once "raggioDistruttore.php";
-require_once "pugnoDiFerro.php";
-require_once "scudoImpenetrabile.php";
+public function sum($a, $b) {
+  return $a + $b;
+}
 
-class IronMan
-{
-    public $attack;
-    public $defense;
-    public static $counter = 0;
+public function sub($a, $b) {
+  return $a - $b;
+}
 
-    public function __construct(Attack $attack, Defense $defense)
-    {
-        $this->attack = $attack;
-        $this->defense = $defense;
-        self::$counter++;
+public function mul($a, $b) {
+  return $a * $b;
+}
+
+public function div($a, $b) {
+  return $a / $b;
+}
+
+public function sqr($a){
+  return sqrt($a);
+}
+
+}
+
+class Rettangolo {
+    use Calculator;
+
+  public $base;
+  public $altezza;
+
+    public function __construct($base, $altezza) {
+        $this->base = $base;
+        $this->altezza = $altezza;
     }
 
-    public function goAttack()
-    {
-        $this->attack->attack();
+    public function area() {
+        return $this->mul($this->base, $this->altezza);
     }
 
-    public function goDefense()
-    {
-        $this->defense->defense();
+    public function perimetro() {
+        $sumBaseAltezza = $this->sum($this->base, $this->altezza);
+        $result= $this->mul(2, $sumBaseAltezza);
+        return $result;
     }
-}   
 
-//esercito di IronMan
-$ironMan = new IronMan(new RaggioDistruttore(), new ScudoImpenetrabile());
-$ironMan->goAttack(); 
-$ironMan->goDefense();
+    public function diagonal() {
+        $baseSquared = $this->mul($this->base, $this->base);
+        $altezzaSquared = $this->mul($this->altezza, $this->altezza);
+        $sumSquares = $this->sum($baseSquared, $altezzaSquared);
+        $result = $this->sqr($sumSquares);
+        return $result;
+    }
+  
 
-$ironMan2 = new IronMan(new PugnoDiFerro(), new Jammer());
-$ironMan2->goAttack();
-$ironMan2->goDefense();
+}
 
-$ironMan3 = new IronMan(new RaggioDistruttore(), new Jammer());
-$ironMan3->goAttack();
-$ironMan3->goDefense();
-
-$ironMan4 = new IronMan(new PugnoDiFerro(), new ScudoImpenetrabile());
-$ironMan4->goAttack();
-$ironMan4->goDefense();
-
-
-echo "Numero di IronMan creati: " . IronMan::$counter . "\n";
+$rettangolo = new Rettangolo(7, 4); 
+echo "Area: " . $rettangolo->area() . "\n";
+echo "Perimetro: " . $rettangolo->perimetro() . "\n";
+echo "Diagonale: " . $rettangolo->diagonal() . "\n";
